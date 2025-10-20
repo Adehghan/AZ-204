@@ -26,7 +26,7 @@ namespace Storage.Controllers
 
             // 2- Client
             BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
-            string containername = "Test" + Guid.NewGuid().ToString();
+            string containername = "test" + Guid.NewGuid().ToString();
             var containerClient = blobServiceClient.GetBlobContainerClient(containername);
 
             // Create container if it doesn't exist (idempotent)
