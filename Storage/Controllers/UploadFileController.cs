@@ -14,6 +14,8 @@ namespace Storage.Controllers
     public class UploadFileController : ControllerBase
     {
 
+        const string CONTAINERNAME = "viramediacontainer";
+
         [HttpPost]
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> UploadFile(IFormFile file)
@@ -28,8 +30,7 @@ namespace Storage.Controllers
 
             // 2- Client
             BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
-            string containername = "test" + Guid.NewGuid().ToString();
-            var containerClient = blobServiceClient.GetBlobContainerClient(containername);
+            var containerClient = blobServiceClient.GetBlobContainerClient(CONTAINERNAME);
 
             // Create container if it doesn't exist (idempotent)
             await containerClient.CreateIfNotExistsAsync(PublicAccessType.None);
@@ -63,8 +64,7 @@ namespace Storage.Controllers
 
             // 2- Client
             BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
-            string containername = "test" + Guid.NewGuid().ToString();
-            var containerClient = blobServiceClient.GetBlobContainerClient(containername);
+            var containerClient = blobServiceClient.GetBlobContainerClient(CONTAINERNAME);
 
             // Create container if it doesn't exist (idempotent)
             await containerClient.CreateIfNotExistsAsync(PublicAccessType.None);
